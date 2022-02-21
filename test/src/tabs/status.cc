@@ -246,7 +246,7 @@ TEST_F(StatusTest, CHECK_GET_SELECTION_TEXT)
   EXPECT_EQ(sm.get_selection_text(), text);
 }
 
-TEST_F(StatusTest, PARSE_JSON_NULL_VALUE) 
+TEST_F(StatusTest, PARSE_JSON_NULL_VALUE)
 {
   // Testing parse_JSON with a null value
   std::string raw_json = "{\"testKey\": null}";
@@ -257,7 +257,7 @@ TEST_F(StatusTest, PARSE_JSON_NULL_VALUE)
   EXPECT_TRUE(res["testKey"].isNull()) << "value of property testKey should be null";
 }
 
-TEST_F(StatusTest, PARSE_JSON_STRING_VALUE) 
+TEST_F(StatusTest, PARSE_JSON_STRING_VALUE)
 {
   // Testing parse_JSON with a string value
   std::string raw_json = "{\"testKey\": \"testString\"}";
@@ -268,7 +268,7 @@ TEST_F(StatusTest, PARSE_JSON_STRING_VALUE)
   EXPECT_EQ(res["testKey"], "testString") << "value of property testKey should be testString";
 }
 
-TEST_F(StatusTest, PARSE_JSON_INT_VALUE) 
+TEST_F(StatusTest, PARSE_JSON_INT_VALUE)
 {
   // Testing parse_JSON with an int value
   std::string raw_json = "{\"testKey\": 10}";
@@ -279,8 +279,8 @@ TEST_F(StatusTest, PARSE_JSON_INT_VALUE)
   EXPECT_EQ(res["testKey"], 10) << "value of property testKey should be 10";
 }
 
-TEST_F(StatusTest, PARSE_JSON_REAL_VALUE) 
-{ 
+TEST_F(StatusTest, PARSE_JSON_REAL_VALUE)
+{
   // Testing parse_JSON with a real (double) value
   std::string raw_json = "{\"testKey\": 5.0}";
   Json::Value res      = sm.parse_JSON(raw_json);
@@ -290,8 +290,8 @@ TEST_F(StatusTest, PARSE_JSON_REAL_VALUE)
   EXPECT_EQ(res["testKey"], 5.0) << "value of property testKey should be 5.0";
 }
 
-TEST_F(StatusTest, PARSE_JSON_BOOLEAN_VALUE) 
-{ 
+TEST_F(StatusTest, PARSE_JSON_BOOLEAN_VALUE)
+{
   // Testing parse_JSON with a boolean value
   std::string raw_json = "{\"testKey\": true}";
   Json::Value res      = sm.parse_JSON(raw_json);
@@ -301,8 +301,8 @@ TEST_F(StatusTest, PARSE_JSON_BOOLEAN_VALUE)
   EXPECT_EQ(res["testKey"], true) << "value of property testKey should be true";
 }
 
-TEST_F(StatusTest, PARSE_JSON_ARRAY_VALUE) 
-{ 
+TEST_F(StatusTest, PARSE_JSON_ARRAY_VALUE)
+{
   // Testing parse_JSON with an array value
   std::string raw_json = "{\"testKey\": [\"string1\", \"string2\", \"string3\"]}";
   Json::Value res      = sm.parse_JSON(raw_json);
@@ -314,8 +314,8 @@ TEST_F(StatusTest, PARSE_JSON_ARRAY_VALUE)
   EXPECT_EQ(res["testKey"][2], "string3") << "value of third element of property testKey should be string3";
 }
 
-TEST_F(StatusTest, PARSE_JSON_OBJECT_VALUE) 
-{ 
+TEST_F(StatusTest, PARSE_JSON_OBJECT_VALUE)
+{
   // Testing parse_JSON with an object value
   std::string raw_json = "{\"testKey\": {\"subKey1\": \"string1\", \"subKey2\": 20, \"subKey3\": true}}";
   Json::Value res      = sm.parse_JSON(raw_json);
@@ -335,7 +335,7 @@ TEST_F(StatusTest, PARSE_JSON_SAMPLE_INPUT)
       "\"complain\"}, \"processes\": {\"/usr/sbin/cupsd\" : [ {\"profile\" : \"/usr/sbin/cupsd\", \"pid\" : \"616\", \"status\" : "
       "\"enforce\"} ], \"/usr/sbin/cups-browsed\" : [ {\"profile\" : \"/usr/sbin/NetworkManager\", \"pid\" : \"619\", \"status\" : "
       "\"unconfined\"} ] }}";
-  Json::Value res      = sm.parse_JSON(raw_json);
+  Json::Value res = sm.parse_JSON(raw_json);
   ASSERT_FALSE(res.isNull()) << "result of parsing json should not be null";
   EXPECT_EQ(res.type(), Json::ValueType::objectValue) << "ValueType of result should be ValueType.objectValue";
   EXPECT_EQ(res["profiles"].type(), Json::ValueType::objectValue) << "ValueType of property profiles should be ValueType.objectValue";
