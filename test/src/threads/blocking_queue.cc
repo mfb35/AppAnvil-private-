@@ -14,16 +14,13 @@ using ::testing::Sequence;
 class BlockingQueueTest : public ::testing::Test
 {
 protected:
-  BlockingQueueTest()
-      : my_internal_queue{new std::deque<int>()}, mtx_mock{new MutexMock()}, b_queue(my_internal_queue, mtx_mock)
-  {
-  }
+  BlockingQueueTest() : my_internal_queue{new std::deque<int>()}, mtx_mock{new MutexMock()}, b_queue(my_internal_queue, mtx_mock) { }
 
   virtual void SetUp() { }
 
   void expect_locks(unsigned int num);
 
-  std::string push_back_arg = "this string should be pushed to the back";
+  std::string push_back_arg  = "this string should be pushed to the back";
   std::string push_front_arg = "this string should be pushed to the front";
 
   //DispatcherMiddleman::CallData cData1;
