@@ -5,34 +5,32 @@
 #include <memory>
 #include <mutex>
 
-/** 
-  * This is a thread safe queue that blocks on a mutex for each operation
-  **/
-template<class T, class Mutex> class BlockingQueue
+template <class T, class Mutex>
+class BlockingQueue
 {
-public:
-  // Constructor
-  BlockingQueue();
-  // For unit testing
-  explicit BlockingQueue(std::deque<T> my_internal_queue, std::shared_ptr<Mutex> my_mtx);
+  public:
+    // Constructor
+    BlockingQueue();
+    // For unit testing
+    explicit BlockingQueue(std::deque<T> my_internal_queue, std::shared_ptr<Mutex> my_mtx);
 
-  // Accessor Methods
-  T front();
-  T back();
-  int size();
-  bool empty();
+    // Accessor Methods
+    T front();
+    T back();
+    int size();
+    bool empty();
+    
+    // Mutator Methods
+    void clear();
+    void push(const T& value);
+    void push_front(const T& value);
+    T pop();
 
-  // Mutator Methods
-  void clear();
-  void push(const T &value);
-  void push_front(const T &value);
-  T pop();
-
-private:
-  // The internal queue that this class acts as a wrapper for
-  std::deque<T> internal_queue;
-  // A mutex to lock the queue when performing operations
-  std::shared_ptr<Mutex> mtx;
+  private:
+    // The internal queue that this class acts as a wrapper for
+    std::deque<T> internal_queue;
+    // A mutex to lock the queue when performing operations
+    std::shared_ptr<Mutex> mtx;
 };
 
 /**
