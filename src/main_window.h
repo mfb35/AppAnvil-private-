@@ -2,6 +2,7 @@
 #define SRC_MAIN_WINDOW_H
 
 #include "console_thread.h"
+#include "tabs/about.h"
 #include "tabs/logs.h"
 #include "tabs/processes.h"
 #include "tabs/profiles.h"
@@ -55,6 +56,7 @@ private:
   std::shared_ptr<Profiles> prof;
   std::shared_ptr<Processes> proc;
   std::shared_ptr<Logs> logs;
+  std::shared_ptr<About> about;
 
   // Second thread for calling command line utilities
   std::shared_ptr<ConsoleThread> console;

@@ -2,12 +2,13 @@
 
 #include <tuple>
 
-MainWindow::MainWindow() : prof{new Profiles()}, proc{new Processes()}, logs{new Logs()}, console{new ConsoleThread(prof, proc, logs)}
+MainWindow::MainWindow() : prof{new Profiles()}, proc{new Processes()}, logs{new Logs()}, about{new About()}, console{new ConsoleThread(prof, proc, logs)}
 {
   // Add tabs to the stack pane
   m_stack.add(*prof, "prof", "Profiles");
   m_stack.add(*proc, "proc", "Processes");
   m_stack.add(*logs, "logs", "Logs");
+  m_stack.add(*about, "about", "About Me");
 
   // Attach the stack to the stack switcher
   m_switcher.set_stack(m_stack);
