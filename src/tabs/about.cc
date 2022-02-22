@@ -1,4 +1,5 @@
 #include "about.h"
+
 #include "../threads/command_caller.h"
 
 #include <iostream>
@@ -13,10 +14,7 @@ template<typename T_Widget> std::unique_ptr<T_Widget> About::get_widget(Glib::us
 }
 
 About::About()
-    : builder{Gtk::Builder::create_from_resource("./resources/about.glade")}, 
-    a_box{About::get_widget<Gtk::Box>("a_box", builder)}
-    {
-        this->add(*a_box);
-    }
-    
-
+    : builder{Gtk::Builder::create_from_resource("./resources/about.glade")}, a_box{About::get_widget<Gtk::Box>("a_box", builder)}
+{
+  this->add(*a_box);
+}
