@@ -51,6 +51,9 @@ void MainWindow::send_status_change(const std::string& profile, const std::strin
 
 bool MainWindow::on_switch(GdkEvent* event){
   std::ignore = event;
+  
+  //make sure to clear the success label on the load tab 
+  file_chooser->clearLabel();
 
   std::string visible_child  = m_stack.get_visible_child_name();
 
