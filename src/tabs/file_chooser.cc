@@ -24,37 +24,35 @@ FileChooser::FileChooser()
 
   l_box->set_hexpand();
   l_box->set_vexpand();
+  
   this->add(*l_box);
+  auto button_func = sigc::mem_fun(*this, &FileChooser::on_confirm_clicked);
+  FileChooser::set_l_button_signal_handler(button_func);
 }
 
-void FileChooser::on_fc_button_clicked(){
-  /*/ Associate the f_diag pointer with a new Dialog
-  auto *next_f_diag = new Gtk::FileChooserDialog("Choose a profile", Gtk::FILE_CHOOSER_ACTION_OPEN);
-  f_diag.reset(next_f_diag); 
 
-  // Close dialog when the OK button is pressed.
-  f_diag->add_button("Confirm", Gtk::ResponseType::RESPONSE_OK);
-  f_diag->signal_response().connect(sigc::mem_fun(*this, &FileChooser::handle_file_chooser_dialogue));
-  f_diag->show();*/
+void FileChooser::set_l_button_signal_handler(const Glib::SignalProxyProperty::SlotType &func){
+        l_confirm_button->signal_clicked().connect(func, true);
 }
 
-void FileChooser::handle_file_chooser_dialogue(int response_id){
-  /*std::ignore = response_id;
-
-  auto filename = f_diag->get_file()->get_path();
-  l_filechooser_label->set_text(filename);
-  f_diag->hide();*/
-}
 
 void FileChooser::on_confirm_clicked(){
-  /*auto choice = l_combo_profile_status_chooser->get_active_text();
-  auto filename = l_filechooser_label->get_text();
-
+  auto choice = l_combo_profile_status_chooser->get_active_text();
+  
+  auto file = l_filechooser_button->get_file();
+  auto filename = file->get_path(); 
+  
   std::string short_filename = CommandCaller::load_profile(filename);
   
   std::string choice_lowercase;
   transform(choice.begin(), choice.end(), choice_lowercase.begin(), ::tolower);
   if(choice_lowercase != "enforce"){
     CommandCaller::execute_change(short_filename, "enforce", choice_lowercase);
-  }*/
+  }
+  
+  l_confirm_label->set_text("Done");
+}
+
+void FileChooser::clearLabel(){
+  l_confirm_label->set_text("");
 }

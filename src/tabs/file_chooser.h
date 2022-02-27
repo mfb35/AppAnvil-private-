@@ -25,11 +25,11 @@ class FileChooser : public Gtk::ScrolledWindow
 {
   public:
     FileChooser();
+    void clearLabel();
     
   protected:
     // Signal handler
-    void on_fc_button_clicked();
-    void handle_file_chooser_dialogue(int response_id);
+    void set_l_button_signal_handler(const Glib::SignalProxyProperty::SlotType &func);
     void on_confirm_clicked();
 
   private:
