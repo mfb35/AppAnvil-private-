@@ -2,7 +2,8 @@
 
 #include <tuple>
 
-MainWindow::MainWindow() : prof{new Profiles()}, proc{new Processes()}, logs{new Logs()}, console{new ConsoleThread(prof, proc, logs)}
+MainWindow::MainWindow()
+    : prof{new Profiles()}, proc{new Processes()}, logs{new Logs<StatusColumnRecord>()}, console{new ConsoleThread(prof, proc, logs)}
 {
   // Add tabs to the stack pane
   m_stack.add(*prof, "prof", "Profiles");
@@ -29,8 +30,13 @@ MainWindow::MainWindow() : prof{new Profiles()}, proc{new Processes()}, logs{new
   m_headerbar.set_hexpand(true);
   m_headerbar.set_show_close_button(true);
 
+  // Set the icon
+  auto builder         = Gtk::Builder::create_from_resource("/resources/icon.glade");
+  Gtk::Image *icon_ptr = nullptr;
+  builder->get_widget<Gtk::Image>("icon", icon_ptr);
+  this->set_icon(icon_ptr->get_pixbuf());
+
   // Set some default settings for the window
-  this->set_icon_from_file("./resources/icon.svg");
   this->set_default_size(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
   this->add_events(Gdk::EventMask::ENTER_NOTIFY_MASK);
 
